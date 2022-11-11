@@ -1,4 +1,4 @@
-import { isEmpty, isObject, isArray, forEach, isBoolean } from './utils'
+import { isEmpty, isObject, isArray, forEach, isString, isBoolean } from './utils'
 import {isNumber} from "./utils"
 
 /**
@@ -40,8 +40,10 @@ function _autoRestValue(source:any, key:string, value:any) {
     source[key] = 0
   } else if(isBoolean(value)) {
     source[key] = false
-  } else  {
+  } else if (isString(value))  {
     source[key] = ''
+  } else {
+    source[key] = undefined
   }
 }
 
