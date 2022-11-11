@@ -1,0 +1,43 @@
+{
+  "name": "ofilterjs",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "ofilter",
+    "object-filter",
+    "object",
+    "filter",
+    "json",
+    "js",
+    "javascript",
+    "node"
+  ],
+  "scripts": {
+    "build:esm": "node scripts/build.js -f esm",
+    "build:cjs": "node scripts/build.js -f cjs",
+    "build:global": "node scripts/build.js -f global",
+    "ts-types": "npx tsc -p tsconfig.json",
+    "build": "npm run ts-types && npm run build:global && npm run build:esm && npm run build:cjs",
+    "test": "node ./test/index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/wenlng/ofilter-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenlang/ofilter-js.git"
+  },
+  "author": "Awen",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.15.13",
+    "minimist": "^1.2.7",
+    "typescript": "^4.8.4"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
+  "module": "dist/ofilter.esm.js",
+  "unpkg": "dist/ofilter.global.js",
+  "jsdelivr": "dist/ofilter.global.js"
+}
