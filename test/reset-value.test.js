@@ -1,4 +1,4 @@
-const resetValue = require('../lib/reset-value')
+const {resetValue} = require('../lib/src/reset-value')
 const testRun = require('./test-run')
 
 const postForm = {

@@ -1,4 +1,4 @@
-const getValue = require('../lib/get-value')
+const {getValue} = require('../lib/src/get-value')
 const testRun = require('./test-run')
 
 const testObjData = {

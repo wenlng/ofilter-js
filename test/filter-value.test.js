@@ -1,4 +1,4 @@
-const filterValue = require('../lib/filter-value')
+const {filterValue} = require('../lib/src/filter-value')
 const testRun = require('./test-run')
 
 const testBasicData = {
