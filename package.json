@@ -1,7 +1,7 @@
 {
   "name": "ofilterjs",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a Javascript object filter",
   "keywords": [
     "ofilter",
     "object-filter",
