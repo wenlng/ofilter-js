@@ -1,7 +1,7 @@
 {
   "name": "ofilterjs",
   "version": "1.0.0",
-  "description": "This is a Javascript object filter",
+  "description": "ofilter-js 是一个专用于Js中的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。",
   "keywords": [
     "ofilter",
     "object-filter",
@@ -10,7 +10,10 @@
     "json",
     "js",
     "javascript",
-    "node"
+    "node",
+    "数据过滤器",
+    "js数据",
+    "js过滤器"
   ],
   "scripts": {
     "build:esm": "node scripts/build.js -f esm",
@@ -29,15 +32,15 @@
   },
   "author": "Awen",
   "license": "MIT",
-  "devDependencies": {
-    "esbuild": "^0.15.13",
-    "minimist": "^1.2.7",
-    "typescript": "^4.8.4"
-  },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "typings": "lib/index.d.ts",
   "module": "dist/ofilter.esm.js",
   "unpkg": "dist/ofilter.global.js",
-  "jsdelivr": "dist/ofilter.global.js"
+  "jsdelivr": "dist/ofilter.global.js",
+  "devDependencies": {
+    "esbuild": "^0.15.13",
+    "minimist": "^1.2.7",
+    "typescript": "^4.8.4"
+  }
 }

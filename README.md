@@ -1,5 +1,5 @@
 <div align="center">
-<h1>OfJs</h1>
+<h1>OfilterJs</h1>
 <p>Javascript 数据对象{}过滤处理器</p>
 <a href="https://github.com/wenlng/ofilter-js/releases"><img src="https://img.shields.io/github/v/release/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
@@ -21,11 +21,11 @@
 
 ### 安装模块
 ``` shell
-$ npm install ofilter-js
+$ npm i ofilterjs
 ```
 或其他 pnpm、cnpm、yarn ...
 ``` shell
-$ pnpm install ofilter-js
+$ pnpm i ofilterjs
 ```
 <br/>
 
