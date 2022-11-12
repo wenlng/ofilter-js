@@ -29,7 +29,7 @@ $ pnpm i ofilterjs
 ```
 <br/>
 
-### 一、Data Filter
+### 1. Data Filter
 filterValue([Object{}], [Config], ...[extraData])
 #### 1.1 Filter or Recombine for data
 ``` ts
@@ -239,7 +239,7 @@ console.log(newData)
 ```
 <br/>
 
-### 二、Read Data
+### 2. Read Data
 getValue([nameStr], [defaultValue])
 #### 2.1 Read Value / Deep Read for value
 ``` ts
@@ -295,7 +295,7 @@ console.log(su)   // js
 ```
 <br/>
 
-### 三、Reset Data
+### 3. Reset Data
 resetValue([Object{}], [Config,?Optional])
 #### 3.1 Auto set at data type
 ``` ts
