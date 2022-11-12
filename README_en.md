@@ -10,7 +10,7 @@
 <br/>
 
 > [中文](README.md) | English
-<p>🖖 ofilter-js is a data object {} filter processor dedicated to Js, which provides simpler, more convenient and more efficient data operations for development. </p>
+<p>🖖 OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development. </p>
 
 <p> ⭐️ If it helps you, please give a star.</p>
 
