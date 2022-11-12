@@ -1,11 +1,11 @@
-import { isEmpty, isObject, isArray, forEach, isString, isBoolean } from './utils'
+import { isEmpty, isObject, isArray, forEach, isString, isBoolean, isFunction } from './utils'
 import {isNumber} from "./utils"
 
 /**
  * 深度解析key重置对应value
- * @param source
- * @param keys
- * @param value
+ * @param source  源数据对象
+ * @param keys    key数组
+ * @param value   值
  * @private
  */
 function _deepResetValue(source:any, keys:Array<any>, value:any) {
@@ -26,9 +26,9 @@ function _deepResetValue(source:any, keys:Array<any>, value:any) {
 
 /**
  * 自动识别类型重置类型的默认值
- * @param source
- * @param key
- * @param value
+ * @param source  源数据对象
+ * @param key     key
+ * @param value   值
  * @private
  */
 function _autoRestValue(source:any, key:string, value:any) {
@@ -42,15 +42,17 @@ function _autoRestValue(source:any, key:string, value:any) {
     source[key] = false
   } else if (isString(value))  {
     source[key] = ''
+  } else if (isFunction(value))  {
+    source[key] = function(){}
   } else {
     source[key] = undefined
   }
 }
 
 /**
- * 重置值
- * @param source
- * @param arg
+ * 重置数据对象值，可以自动根据值类型重置，也可以手动配置指定重置
+ * @param source  源数据对象
+ * @param arg     参数
  * @returns {*}
  */
 export function resetValue(source:any, arg?:any):boolean {

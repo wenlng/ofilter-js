@@ -2,9 +2,9 @@ import { isEmpty, isString, isObject, isNumber, isArray } from './utils'
 
 /**
  * 递归获取属性
- * @param params  参数包
- * @param nameArr key数组
- * @param defaultVal 默认值
+ * @param params      数据对象
+ * @param nameArr     key数组
+ * @param defaultVal  默认值
  * @return {*}
  */
 function _deepGetAttr(params:any, nameArr:Array<any>, defaultVal?:any):any {
@@ -32,10 +32,10 @@ function _deepGetAttr(params:any, nameArr:Array<any>, defaultVal?:any):any {
 
 /**
  * 递归key获取
- * @param params
- * @param _nameStr
- * @param _nameList
- * @param _defaultVal
+ * @param params      数据对象
+ * @param _nameStr    key名称 ['a.b', 'b.c.d', ...]
+ * @param _nameList   名称列表 [['a.b', 'b.c.d', ...], ['a.b', 'b.c.d', ...], ...]
+ * @param _defaultVal 默认值
  * @return {*}
  */
 function _deepGet(params:any, _nameStr:string, _nameList:Array<any>, _defaultVal?:any):any {
@@ -48,10 +48,10 @@ function _deepGet(params:any, _nameStr:string, _nameList:Array<any>, _defaultVal
 }
 
 /**
- * getFilterValue 获取属性，不存在取默认值
- * @param source
- * @param name
- * @param defaultVal
+ * getValue 获取属性，不存在则取默认值，支持多个值优先获取
+ * @param source      源数据对象
+ * @param name        名称  'a.b.c' 或 'a.b.c|a.b.d'
+ * @param defaultVal  默认值
  * @return {*}
  */
 export function getValue(source:any, name:string, defaultVal?:any): any {
@@ -62,11 +62,9 @@ export function getValue(source:any, name:string, defaultVal?:any): any {
     return _dv
   }
 
-  // name 允许多个值
   const nameList = name.toString().split('|')
   const nameStr:any = nameList.shift()
 
-  // 深度递归读取
   const res = _deepGet(source, nameStr, nameList, _dv)
 
   if (isEmpty(res)) return _dv
