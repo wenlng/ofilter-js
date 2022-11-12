@@ -19,6 +19,12 @@
 - 🍐 getValue
 - 🍎 resetValue
 
+
+### Supported languages
+- Javascript
+- TypeScript
+- ECMAScript 6+
+
 ### Install Module
 ``` shell
 $ npm i ofilterjs

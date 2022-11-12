@@ -19,6 +19,11 @@
 - 🍐 getValue 读取数据
 - 🍎 resetValue 重置数据
 
+### 支持语言
+- Javascript
+- TypeScript
+- ECMAScript 6+
+
 ### 安装模块
 ``` shell
 $ npm i ofilterjs
