@@ -14,16 +14,16 @@
 
 <p> ⭐️ If it helps you, please give a star.</p>
 
+### Supported languages
+- Javascript
+- TypeScript
+- ECMAScript 6+
+
 ### Methods
 - 🍑 filterValue
 - 🍐 getValue
 - 🍎 resetValue
 
-
-### Supported languages
-- Javascript
-- TypeScript
-- ECMAScript 6+
 
 ### Install Module
 ``` shell

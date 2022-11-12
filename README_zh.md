@@ -14,15 +14,15 @@
 
 <p> ⭐️ 如果能够帮助到你，记得随手点一个star。</p>
 
-### 功能
-- 🍑 filterValue 过滤数据
-- 🍐 getValue 读取数据
-- 🍎 resetValue 重置数据
-
 ### 支持语言
 - Javascript
 - TypeScript
 - ECMAScript 6+
+
+### 功能
+- 🍑 filterValue 过滤数据
+- 🍐 getValue 读取数据
+- 🍎 resetValue 重置数据
 
 ### 安装模块
 ``` shell
