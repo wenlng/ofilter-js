@@ -1,6 +1,6 @@
 <div align="center">
-<h1>ofilterJs</h1>
-<p> Data object filter of Javascript lib</p>
+<h1>OfJs</h1>
+<p>Data filter processor of Javascript object{}</p>
 <a href="https://github.com/wenlng/ofilter-js/releases"><img src="https://img.shields.io/github/v/release/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/stars/wenlng/ofilter-js.svg"/></a>
@@ -8,3 +8,394 @@
 </div>
 
 <br/>
+
+> [中文](README.md) | English
+<p>🖖 ofilter-js is a data object {} filter processor dedicated to Js, which provides simpler, more convenient and more efficient data operations for development. </p>
+
+<p> ⭐️ If it helps you, please give a star.</p>
+
+### Methods
+- 🍑 filterValue
+- 🍐 getValue
+- 🍎 resetValue
+
+### Install Module
+``` shell
+$ npm install ofilter-js
+```
+Or pnpm、cnpm、yarn ...
+``` shell
+$ pnpm install ofilter-js
+```
+<br/>
+
+### 一、Data Filter
+filterValue([Object{}], [Config], ...[extraData])
+#### 1.1 Filter or Recombine for data
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name',
+    versionNumber: 'lib.pkg.version_number',
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        versionNumber: 10001
+   } 
+*/
+```
+<br/>
+
+#### 1.2 Set value
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name',
+    type: {
+        value: 'type value'
+    }
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        type: 'type value'
+   } 
+*/
+```
+<br/>
+
+#### 1.3 Set default value
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name',
+    alias: {
+        key: 'lib.pkg.alias',
+        dv: 'Default alias'
+    },
+    type: {
+        key: 'lib.pkg.type',
+        dv: 'Npm pkg'
+    }
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        alias: 'Default alias',
+        type: 'Npm pkg'
+   } 
+*/
+```
+<br/>
+
+#### 1.4 Custom filter callback
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name',
+    alias: {
+        key: 'lib.pkg.alias',
+        filter: (value, source) => {
+            if (value !== '') return value
+            return 'This is ' + (source?.lib?.pkg?.name || 'unknown')
+        }
+    },
+    type: {
+        key: 'lib.pkg.type',
+        filter: (value, source) => {
+            return 'Filter npm'
+        }
+    }
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        alias: 'This is ofilterjs',
+        type: 'Filter npm'
+   } 
+*/
+```
+<br/>
+
+#### 1.5 Merge data to result
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name',
+    _: {
+        merge: true,
+        filter: (_, source) => {
+            if (lib.pkg.name === 'ofilterjs') {
+                return {
+                   support: ['js', 'ts', 'es']
+                }
+            }
+            return {}
+        }
+    },
+    _1: {
+        merge: true,
+        filter: (_, source) => {
+            return { more: 'more data ...' }
+        }
+    },
+  }
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        support: ['js', 'ts', 'es'],
+        more: 'more data ...'
+   } 
+*/
+```
+<br/>
+
+#### 1.6 Merge extra data to result
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version_number: 10001
+        }
+    }
+}
+
+const newData = ofjs.filterValue(data, {
+    name: 'lib.pkg.name'
+  }
+}, {
+    name1: 'ofilter'
+}, {
+    name2: 'object filter'
+})
+console.log(newData)
+
+/** result
+   newData = {
+        name: 'ofilterjs',
+        name1: 'ofilter',
+        name2: 'object filter'
+   } 
+*/
+```
+<br/>
+
+### 二、Read Data
+getValue([nameStr], [defaultValue])
+#### 2.1 Read Value / Deep Read
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+const name = ofjs.getValue('data.lib.pkg.name', 'unknown')
+console.log(name)   // ofilterjs
+```
+<br/>
+
+#### 2.2、Priority reading value
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+const alias = ofjs.getValue('data.lib.pkg.alias|data.lib.pkg.name', 'unknown')
+console.log(name)   // ofilterjs
+```
+
+<br/>
+
+#### 2.3、Array index read
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+const su = ofjs.getValue('data.lib.support.0', 'unknown')
+console.log(su)   // js
+```
+<br/>
+
+### 三、Reset Data
+resetValue([Object{}], [Config,?Optional])
+#### 3.1 Auto set at data type
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+ofjs.resetValue(data)
+
+/**  result
+const data = {
+    lib: {
+        pkg: {
+            name: '',
+            alias: '',
+            version: 0
+        },
+        support: []
+    }
+}
+*/
+```
+<br/>
+
+#### 3.2 Config reset field
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+ofjs.resetValue(data, [
+    'lib.pkg.name',
+    'lib.pkg.version'
+])
+
+/**  result
+const data = {
+    lib: {
+        pkg: {
+            name: '',
+            alias: '',
+            version: 0
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+*/
+```
+<br/>
+
+#### 3.3 Config set data
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+
+// us ofilterjs
+ofjs.resetValue(data, {
+    'lib.pkg.name': 'newname',
+    'lib.pkg.version': 10002
+})
+
+/** result
+const data = {
+    lib: {
+        pkg: {
+            name: 'newname',
+            alias: '',
+            version: 10002
+        },
+        support: ['js', 'ts', 'es']
+    }
+}
+*/
+```
+<br/>
+
+> Buy the author coffee: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+<br/>
+
+## LICENSE
+    MIT

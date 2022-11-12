@@ -27,7 +27,7 @@ $ npm install ofilter-js
 ``` shell
 $ pnpm install ofilter-js
 ```
-
+<br/>
 
 ### 一、数据过滤
 filterValue([数据对象], [配置项], ...[扩展数据])
@@ -349,6 +349,19 @@ pkg['version'] = 0
 
 // 使用 ofilterjs 方式
 ofjs.resetValue(data)
+
+/**  result
+const data = {
+    lib: {
+        pkg: {
+            name: '',
+            alias: '',
+            version: 0
+        },
+        support: []
+    }
+}
+*/
 ```
 <br/>
 
