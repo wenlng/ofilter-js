@@ -308,6 +308,9 @@ var require_reset_value = __commonJS({
         source[key] = false;
       } else if ((0, utils_1.isString)(value)) {
         source[key] = "";
+      } else if ((0, utils_1.isFunction)(value)) {
+        source[key] = function() {
+        };
       } else {
         source[key] = void 0;
       }
