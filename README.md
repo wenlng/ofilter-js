@@ -237,7 +237,7 @@ console.log(newData)
    } 
 */
 ```
-
+<br/>
 
 ### 二、数据读取
 getValue([名称访问字符串], [默认值])
@@ -322,7 +322,7 @@ console.log(su)   // js
 const su = ofjs.getValue('data.lib.support.0', 'unknown')
 console.log(su)   // js
 ```
-
+<br/>
 
 ### 三、数据重置
 resetValue([数据对象], [配置，可选])
