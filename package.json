@@ -1,7 +1,7 @@
 {
   "name": "ofilterjs",
   "version": "1.0.0",
-  "description": "ofilter-js 是一个专用于Js中的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。",
+  "description": "OfilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。",
   "keywords": [
     "ofilter",
     "object-filter",

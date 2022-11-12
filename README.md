@@ -10,7 +10,7 @@
 <br/>
 
 > 中文 | [English](README_en.md)
-<p>🖖 ofilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。</p>
+<p>🖖 OfilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。</p>
 
 <p> ⭐️ 如果能够帮助到你，记得随手点一个star。</p>
 
