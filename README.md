@@ -58,7 +58,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.2 过滤/重组数据，直接指定值
+#### 1.2 直接指定值
 ``` ts
 const data = {
     lib: {
@@ -87,7 +87,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.3 过滤/重组数据，设置默认值
+#### 1.3 设置默认值
 ``` ts
 const data = {
     lib: {
@@ -122,7 +122,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.4 过滤/重组数据，自定义过滤回调
+#### 1.4 自定义过滤回调
 ``` ts
 const data = {
     lib: {
@@ -162,7 +162,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.5 过滤/重组数据，合并多个结果集
+#### 1.5 合并到结果集
 ``` ts
 const data = {
     lib: {
@@ -207,7 +207,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.6 过滤/重组数据，扩展数据
+#### 1.6 合并扩展数据
 ``` ts
 const data = {
     lib: {
