@@ -1,7 +1,7 @@
 {
   "name": "ofilterjs",
   "version": "1.0.0",
-  "description": "OfilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。",
+  "description": "OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development.",
   "keywords": [
     "ofilter",
     "object-filter",
@@ -23,12 +23,13 @@
     "build": "npm run ts-types && npm run build:global && npm run build:esm && npm run build:cjs",
     "test": "node ./test/index.js"
   },
+  "homepage": "https://github.com/wenlng/ofilter-js",
   "bugs": {
     "url": "https://github.com/wenlng/ofilter-js/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wenlang/ofilter-js.git"
+    "url": "git+https://github.com/wenlng/ofilter-js.git"
   },
   "author": "Awen",
   "license": "MIT",

@@ -1,6 +1,6 @@
 <div align="center">
 <h1>OfilterJs</h1>
-<p>Data filter processor of Javascript object{}</p>
+<p>Javascript 数据对象{}过滤处理器</p>
 <a href="https://github.com/wenlng/ofilter-js/releases"><img src="https://img.shields.io/github/v/release/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/stars/wenlng/ofilter-js.svg"/></a>
@@ -9,29 +9,29 @@
 
 <br/>
 
-> [中文](README.md) | English
-<p>🖖 OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development. </p>
+> [English](README.md) | 中文
+<p>🖖 OfilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。</p>
 
-<p> ⭐️ If it helps you, please give a star.</p>
+<p> ⭐️ 如果能够帮助到你，记得随手点一个star。</p>
 
-### Methods
-- 🍑 filterValue
-- 🍐 getValue
-- 🍎 resetValue
+### 功能
+- 🍑 filterValue 过滤数据
+- 🍐 getValue 读取数据
+- 🍎 resetValue 重置数据
 
-### Install Module
+### 安装模块
 ``` shell
 $ npm i ofilterjs
 ```
-Or pnpm、cnpm、yarn ...
+或其他 pnpm、cnpm、yarn ...
 ``` shell
 $ pnpm i ofilterjs
 ```
 <br/>
 
-### 一、Data Filter
-filterValue([Object{}], [Config], ...[extraData])
-#### 1.1 Filter or Recombine for data
+### 一、数据过滤
+filterValue([数据对象], [配置项], ...[扩展数据])
+#### 1.1 过滤/重组数据
 ``` ts
 const data = {
     lib: {
@@ -49,7 +49,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         versionNumber: 10001
@@ -58,7 +58,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.2 Set value
+#### 1.2 直接指定值
 ``` ts
 const data = {
     lib: {
@@ -78,7 +78,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         type: 'type value'
@@ -87,7 +87,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.3 Set default value
+#### 1.3 设置默认值
 ``` ts
 const data = {
     lib: {
@@ -112,7 +112,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         alias: 'Default alias',
@@ -122,7 +122,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.4 Custom filter callback
+#### 1.4 自定义过滤回调
 ``` ts
 const data = {
     lib: {
@@ -152,7 +152,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         alias: 'This is ofilterjs',
@@ -162,7 +162,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.5 Merge data to result
+#### 1.5 合并到结果集
 ``` ts
 const data = {
     lib: {
@@ -197,7 +197,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         support: ['js', 'ts', 'es'],
@@ -207,7 +207,7 @@ console.log(newData)
 ```
 <br/>
 
-#### 1.6 Merge extra data to result
+#### 1.6 合并扩展数据
 ``` ts
 const data = {
     lib: {
@@ -229,7 +229,7 @@ const newData = ofjs.filterValue(data, {
 })
 console.log(newData)
 
-/** result
+/** 结果
    newData = {
         name: 'ofilterjs',
         name1: 'ofilter',
@@ -239,9 +239,9 @@ console.log(newData)
 ```
 <br/>
 
-### 二、Read Data
-getValue([nameStr], [defaultValue])
-#### 2.1 Read Value / Deep Read
+### 二、数据读取
+getValue([名称访问字符串], [默认值])
+#### 2.1 值读取 / 深度读取
 ``` ts
 const data = {
     lib: {
@@ -253,12 +253,21 @@ const data = {
     }
 }
 
+// 原始方式
+const name = data && data['lib'] && data['lib']['name'] && data['lib']['pkg']['name'] || 'unknown'
+console.log(name)   // ofilterjs
+
+// es6的 ?. 方式
+const name = data?.lib?.pkg?.name || 'unknown'
+console.log(name)   // ofilterjs
+
+// 使用 ofilterjs 方式
 const name = ofjs.getValue('data.lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 <br/>
 
-#### 2.2、Priority reading value
+#### 2.2、优先读取值
 ``` ts
 const data = {
     lib: {
@@ -271,13 +280,23 @@ const data = {
     }
 }
 
+// 原始方式
+const currnet = data && data['lib'] && data['lib']['pkg'] || {}
+const alias = currnet['alias'] || currnet['name'] || 'unknown'
+console.log(alias)   // ofilterjs
+
+// es6的 ?. 方式
+const alias = data?.lib?.pkg?.alias || data?.lib?.pkg?.name || 'unknown'
+console.log(alias)   // ofilterjs
+
+// 使用 ofilterjs 方式
 const alias = ofjs.getValue('data.lib.pkg.alias|data.lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 
 <br/>
 
-#### 2.3、Array index read
+#### 2.3、数组索引下标读取
 ``` ts
 const data = {
     lib: {
@@ -290,14 +309,24 @@ const data = {
     }
 }
 
+// 原始方式
+const support = data && data['lib'] && data['lib']['support'] || {}
+const su = support[0] || 'unknown'
+console.log(su)   // js
+
+// es6的 ?. 方式
+const su = data?.lib?.support?.[0] || 'unknown'
+console.log(su)   // js
+
+// 使用 ofilterjs 方式
 const su = ofjs.getValue('data.lib.support.0', 'unknown')
 console.log(su)   // js
 ```
 <br/>
 
-### 三、Reset Data
-resetValue([Object{}], [Config,?Optional])
-#### 3.1 Auto set at data type
+### 三、数据重置
+resetValue([数据对象], [配置，可选])
+#### 3.1 自动识别值类型重置值
 ``` ts
 const data = {
     lib: {
@@ -310,6 +339,15 @@ const data = {
     }
 }
 
+// 原始方式
+const lib = data && data['lib'] || {}
+lib['support'] = []
+const pkg = lib && lib['pkg'] || {}
+pkg['alias'] = ''
+pkg['name'] = ''
+pkg['version'] = 0
+
+// 使用 ofilterjs 方式
 ofjs.resetValue(data)
 
 /**  result
@@ -327,7 +365,7 @@ const data = {
 ```
 <br/>
 
-#### 3.2 Config reset field
+#### 3.2 手动指定重置字段
 ``` ts
 const data = {
     lib: {
@@ -340,12 +378,13 @@ const data = {
     }
 }
 
+// 使用 ofilterjs 方式
 ofjs.resetValue(data, [
     'lib.pkg.name',
     'lib.pkg.version'
 ])
 
-/**  result
+/**  结果
 const data = {
     lib: {
         pkg: {
@@ -360,7 +399,7 @@ const data = {
 ```
 <br/>
 
-#### 3.3 Config set data
+#### 3.3 手动配置字段设置指定的值
 ``` ts
 const data = {
     lib: {
@@ -373,13 +412,13 @@ const data = {
     }
 }
 
-// us ofilterjs
+// 使用 ofilterjs 方式
 ofjs.resetValue(data, {
     'lib.pkg.name': 'newname',
     'lib.pkg.version': 10002
 })
 
-/** result
+/** 结果
 const data = {
     lib: {
         pkg: {
@@ -394,7 +433,7 @@ const data = {
 ```
 <br/>
 
-> Buy the author coffee: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+> 请作者喝杯咖啡: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
 <br/>
 
 ## LICENSE
