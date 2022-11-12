@@ -45,6 +45,21 @@ testRun([
 postForm.name = 'awen'
 postForm.age = 19
 postForm.account = {
+  orderName: 'dog',
+  orderPay: 200
+}
+
+resetValue(postForm, ["account.orderName", "account.orderPay"])
+
+testRun([
+  { name: '手动配置重置数据1', result: JSON.stringify(postForm), equals: '{"name":"awen","age":19,"account":{"orderName":"","orderPay":0}}' },
+])
+
+
+///////////////////////////
+postForm.name = 'awen'
+postForm.age = 19
+postForm.account = {
   orderName: 1000,
   orderPay: 200
 }
@@ -55,5 +70,5 @@ resetValue(postForm, {
 })
 
 testRun([
-  { name: '手动配置重置数据', result: JSON.stringify(postForm), equals: '{"name":"awen","age":19,"account":{"orderName":"","orderPay":0}}' },
+  { name: '手动配置重置数据2', result: JSON.stringify(postForm), equals: '{"name":"awen","age":19,"account":{"orderName":"","orderPay":0}}' },
 ])

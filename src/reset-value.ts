@@ -6,9 +6,10 @@ import {isNumber} from "./utils"
  * @param source  源数据对象
  * @param keys    key数组
  * @param value   值
+ * @param isAuto  是否自动赋值
  * @private
  */
-function _deepResetValue(source:any, keys:Array<any>, value:any) {
+function _deepResetValue(source:any, keys:Array<any>, value:any, isAuto:boolean) {
   if (keys.length <= 0) return
 
   const curKey = keys.shift()
@@ -16,12 +17,13 @@ function _deepResetValue(source:any, keys:Array<any>, value:any) {
 
   if (keys.length <= 0) {
     if (typeof source[curKey] !== 'undefined') {
-      _autoRestValue(source, curKey, value)
+      isAuto && _autoRestValue(source, curKey, source[curKey])
+      !isAuto && (source[curKey] = value)
     }
     return
   }
 
-  if (!isEmpty(source[curKey])) _deepResetValue(source[curKey], keys, value)
+  if (!isEmpty(source[curKey])) _deepResetValue(source[curKey], keys, value, isAuto)
 }
 
 /**
@@ -59,10 +61,15 @@ export function resetValue(source:any, arg?:any):boolean {
   source = source || {}
   const deep = arg = arg || false
 
-  if (!isEmpty(arg) && isObject(arg)) {
+  if (!isEmpty(arg) && isArray(arg)) {
+    forEach(arg, (value:any, key:string) => {
+      let keys = value.split('.')
+      _deepResetValue(source, keys, value, true)
+    })
+  } else if (!isEmpty(arg) && isObject(arg)) {
     forEach(arg, (value:any, key:string) => {
       let keys = key.split('.')
-      _deepResetValue(source, keys, value)
+      _deepResetValue(source, keys, value, false)
     })
   } else {
     forEach(source, (value:any, key:string) => {

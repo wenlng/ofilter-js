@@ -283,7 +283,7 @@ var ofilterjs = (() => {
       exports.resetValue = void 0;
       var utils_1 = require_utils();
       var utils_2 = require_utils();
-      function _deepResetValue(source, keys, value) {
+      function _deepResetValue(source, keys, value, isAuto) {
         if (keys.length <= 0)
           return;
         const curKey = keys.shift();
@@ -291,12 +291,13 @@ var ofilterjs = (() => {
           return;
         if (keys.length <= 0) {
           if (typeof source[curKey] !== "undefined") {
-            _autoRestValue(source, curKey, value);
+            isAuto && _autoRestValue(source, curKey, source[curKey]);
+            !isAuto && (source[curKey] = value);
           }
           return;
         }
         if (!(0, utils_1.isEmpty)(source[curKey]))
-          _deepResetValue(source[curKey], keys, value);
+          _deepResetValue(source[curKey], keys, value, isAuto);
       }
       function _autoRestValue(source, key, value) {
         if ((0, utils_1.isArray)(value)) {
@@ -319,10 +320,15 @@ var ofilterjs = (() => {
       function resetValue(source, arg) {
         source = source || {};
         const deep = arg = arg || false;
-        if (!(0, utils_1.isEmpty)(arg) && (0, utils_1.isObject)(arg)) {
+        if (!(0, utils_1.isEmpty)(arg) && (0, utils_1.isArray)(arg)) {
+          (0, utils_1.forEach)(arg, (value, key) => {
+            let keys = value.split(".");
+            _deepResetValue(source, keys, value, true);
+          });
+        } else if (!(0, utils_1.isEmpty)(arg) && (0, utils_1.isObject)(arg)) {
           (0, utils_1.forEach)(arg, (value, key) => {
             let keys = key.split(".");
-            _deepResetValue(source, keys, value);
+            _deepResetValue(source, keys, value, false);
           });
         } else {
           (0, utils_1.forEach)(source, (value, key) => {
