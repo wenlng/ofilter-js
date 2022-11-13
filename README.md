@@ -268,7 +268,7 @@ const data = {
     }
 }
 
-const name = ofjs.getValue('data.lib.pkg.name', 'unknown')
+const name = ofjs.getValue(data, 'lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 <br/>
@@ -286,7 +286,7 @@ const data = {
     }
 }
 
-const alias = ofjs.getValue('data.lib.pkg.alias|data.lib.pkg.name', 'unknown')
+const alias = ofjs.getValue(data, 'lib.pkg.alias|lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 
@@ -305,7 +305,7 @@ const data = {
     }
 }
 
-const su = ofjs.getValue('data.lib.support.0', 'unknown')
+const su = ofjs.getValue(data, 'lib.support.0', 'unknown')
 console.log(su)   // js
 ```
 <br/>

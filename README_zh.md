@@ -276,7 +276,7 @@ const name = data?.lib?.pkg?.name || 'unknown'
 console.log(name)   // ofilterjs
 
 // 使用 ofilterjs 方式
-const name = ofjs.getValue('data.lib.pkg.name', 'unknown')
+const name = ofjs.getValue(data, 'lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 <br/>
@@ -304,7 +304,7 @@ const alias = data?.lib?.pkg?.alias || data?.lib?.pkg?.name || 'unknown'
 console.log(alias)   // ofilterjs
 
 // 使用 ofilterjs 方式
-const alias = ofjs.getValue('data.lib.pkg.alias|data.lib.pkg.name', 'unknown')
+const alias = ofjs.getValue(data, 'lib.pkg.alias|lib.pkg.name', 'unknown')
 console.log(name)   // ofilterjs
 ```
 
@@ -333,7 +333,7 @@ const su = data?.lib?.support?.[0] || 'unknown'
 console.log(su)   // js
 
 // 使用 ofilterjs 方式
-const su = ofjs.getValue('data.lib.support.0', 'unknown')
+const su = ofjs.getValue(data, 'lib.support.0', 'unknown')
 console.log(su)   // js
 ```
 <br/>
