@@ -494,7 +494,7 @@ const data = {
             alias: '',  // Was reset
             version: 0, // Was reset
             support: {
-                // level 2
+                // level 3
                 'js' : 'javascript',
                 'ts' : 'typescript'
             }
