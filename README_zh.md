@@ -1,7 +1,8 @@
 <div align="center">
-<h1>OfilterJs</h1>
+<h1>OfilterJS</h1>
 <p>Javascript 数据对象{}过滤处理器</p>
-<a href="https://github.com/wenlng/ofilter-js/releases"><img src="https://img.shields.io/github/v/release/wenlng/ofilter-js.svg"/></a>
+ <a href="https://www.npmjs.com/package/ofilterjs" alt="Version"><img src="https://img.shields.io/npm/v/ofilterjs.svg" alt="Downloads"></a>
+ <a href="https://npmcharts.com/compare/ofilterjs?minimal=true"><img src="https://img.shields.io/npm/dm/ofilterjs.svg?sanitize=true" alt="Downloads"></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/stars/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/last-commit/wenlng/ofilter-js.svg"/></a>
@@ -13,11 +14,11 @@
 <p>🖖 OfilterJs 是一个用于 Javascript 的数据对象{}过滤处理器，为开发提供更简单、便捷、高效的数据操作。</p>
 
 <p> ⭐️ 如果能够帮助到你，记得随手点一个star。</p>
+<br/>
 
 ### 支持语言
 - Javascript
 - TypeScript
-- ECMAScript 6+
 
 ### 功能
 - 🍑 filterValue 过滤数据
@@ -31,6 +32,14 @@ $ npm i ofilterjs
 或其他 pnpm、cnpm、yarn ...
 ``` shell
 $ pnpm i ofilterjs
+```
+<br/>
+
+### 引入模块
+``` ts
+ import ofjs from 'ofilterjs'
+ 
+ // const ofjs = require('ofilterjs')
 ```
 <br/>
 
@@ -108,11 +117,11 @@ const newData = ofjs.filterValue(data, {
     name: 'lib.pkg.name',
     alias: {
         key: 'lib.pkg.alias',
-        dv: 'Default alias'
+        default: 'Default alias'
     },
     type: {
         key: 'lib.pkg.type',
-        dv: 'Npm pkg'
+        default: 'Npm pkg'
     }
 })
 console.log(newData)
@@ -272,7 +281,7 @@ console.log(name)   // ofilterjs
 ```
 <br/>
 
-#### 2.2、优先读取值
+#### 2.2 优先读取值
 ``` ts
 const data = {
     lib: {
@@ -301,7 +310,7 @@ console.log(name)   // ofilterjs
 
 <br/>
 
-#### 2.3、数组索引下标读取
+#### 2.3 数组索引下标读取
 ``` ts
 const data = {
     lib: {

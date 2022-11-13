@@ -1,7 +1,8 @@
 <div align="center">
-<h1>OfilterJs</h1>
+<h1>OfilterJS</h1>
 <p>Data filter processor of Javascript object{}</p>
-<a href="https://github.com/wenlng/ofilter-js/releases"><img src="https://img.shields.io/github/v/release/wenlng/ofilter-js.svg"/></a>
+ <a href="https://www.npmjs.com/package/ofilterjs"><img src="https://img.shields.io/npm/v/ofilterjs.svg" alt="Downloads"></a>
+ <a href="https://npmcharts.com/compare/ofilterjs?minimal=true"><img src="https://img.shields.io/npm/dm/ofilterjs.svg?sanitize=true" alt="Downloads"></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/stars/wenlng/ofilter-js.svg"/></a>
 <a href="https://github.com/wenlng/ofilter-js"><img src="https://img.shields.io/github/last-commit/wenlng/ofilter-js.svg"/></a>
@@ -13,11 +14,11 @@
 <p>🖖 OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development. </p>
 
 <p> ⭐️ If it helps you, please give a star.</p>
+<br/>
 
 ### Supported languages
 - Javascript
 - TypeScript
-- ECMAScript 6+
 
 ### Methods
 - 🍑 filterValue
@@ -29,9 +30,17 @@
 ``` shell
 $ npm i ofilterjs
 ```
-Or pnpm、cnpm、yarn ...
-``` shell
+Or pnpm, Or cnpm, Or yarn ...
+``` shells
 $ pnpm i ofilterjs
+```
+<br/>
+
+### Import Module
+``` ts
+ import ofjs from 'ofilterjs'
+ 
+ // const ofjs = require('ofilterjs')
 ```
 <br/>
 
@@ -109,11 +118,11 @@ const newData = ofjs.filterValue(data, {
     name: 'lib.pkg.name',
     alias: {
         key: 'lib.pkg.alias',
-        dv: 'Default alias'
+        default: 'Default alias'
     },
     type: {
         key: 'lib.pkg.type',
-        dv: 'Npm pkg'
+        default: 'Npm pkg'
     }
 })
 console.log(newData)
