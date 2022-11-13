@@ -193,7 +193,7 @@ const newData = ofjs.filterValue(data, {
     _: {
         merge: true,
         filter: (_, source) => {
-            if (source.lib.pkg.name === 'ofilterjs') {
+            if (source?.lib?.pkg?.name === 'ofilterjs') {
                 return {
                    support: ['js', 'ts', 'es']
                 }
@@ -353,7 +353,7 @@ const data = {
     }
 }
 
-// 原始方式
+// 原始手动方式
 const lib = data && data['lib'] || {}
 lib['support'] = []
 const pkg = lib && lib['pkg'] || {}
@@ -364,7 +364,7 @@ pkg['version'] = 0
 // 使用 ofilterjs 方式
 ofjs.resetValue(data)
 
-/**  result
+/**  结果
 const data = {
     lib: {
         pkg: {
@@ -392,7 +392,6 @@ const data = {
     }
 }
 
-// 使用 ofilterjs 方式
 ofjs.resetValue(data, [
     'lib.pkg.name',
     'lib.pkg.version'
@@ -426,7 +425,6 @@ const data = {
     }
 }
 
-// 使用 ofilterjs 方式
 ofjs.resetValue(data, {
     'lib.pkg.name': 'newname',
     'lib.pkg.version': 10002
