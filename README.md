@@ -194,7 +194,7 @@ const newData = ofjs.filterValue(data, {
     _: {
         merge: true,
         filter: (_, source) => {
-            if (lib.pkg.name === 'ofilterjs') {
+            if (source.lib.pkg.name === 'ofilterjs') {
                 return {
                    support: ['js', 'ts', 'es']
                 }
@@ -273,7 +273,7 @@ console.log(name)   // ofilterjs
 ```
 <br/>
 
-#### 2.2、Priority reading value
+#### 2.2 Priority reading value
 ``` ts
 const data = {
     lib: {
@@ -292,7 +292,7 @@ console.log(name)   // ofilterjs
 
 <br/>
 
-#### 2.3、Array index read
+#### 2.3 Array index read
 ``` ts
 const data = {
     lib: {

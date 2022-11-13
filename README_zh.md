@@ -193,7 +193,7 @@ const newData = ofjs.filterValue(data, {
     _: {
         merge: true,
         filter: (_, source) => {
-            if (lib.pkg.name === 'ofilterjs') {
+            if (source.lib.pkg.name === 'ofilterjs') {
                 return {
                    support: ['js', 'ts', 'es']
                 }
