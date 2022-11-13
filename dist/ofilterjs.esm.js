@@ -315,30 +315,62 @@ var require_reset_value = __commonJS({
         source[key] = void 0;
       }
     }
-    function resetValue(source, arg) {
+    function resetValue(source, arg, ...args) {
       source = source || {};
-      const deep = arg = arg || false;
-      if (!(0, utils_1.isEmpty)(arg) && (0, utils_1.isArray)(arg)) {
-        (0, utils_1.forEach)(arg, (value, key) => {
+      const config = arg || false;
+      const deep = (0, utils_1.isBoolean)(config) ? config : false;
+      let start = (args === null || args === void 0 ? void 0 : args[1]) || 0;
+      let length = (args === null || args === void 0 ? void 0 : args[0]) || 0;
+      if ((0, utils_1.isEmpty)(source) || !(0, utils_1.isObject)(source))
+        return false;
+      if (!(0, utils_1.isEmpty)(config) && (0, utils_1.isArray)(config)) {
+        (0, utils_1.forEach)(config, (value, key) => {
           let keys = value.split(".");
           _deepResetValue(source, keys, value, true);
         });
-      } else if (!(0, utils_1.isEmpty)(arg) && (0, utils_1.isObject)(arg)) {
-        (0, utils_1.forEach)(arg, (value, key) => {
+      } else if (!(0, utils_1.isEmpty)(config) && (0, utils_1.isObject)(config)) {
+        (0, utils_1.forEach)(config, (value, key) => {
           let keys = key.split(".");
           _deepResetValue(source, keys, value, false);
         });
       } else {
+        if (!deep) {
+          start = 0;
+          length = 1;
+        }
         (0, utils_1.forEach)(source, (value, key) => {
           if (deep && (0, utils_1.isObject)(value)) {
-            return resetValue(source[key], arg);
+            if (start === 0 && length === 0) {
+              resetValue(source[key], arg, ...args);
+            } else {
+              _deepResetValueRange(source[key], 1, start, length);
+            }
+          } else if (key.toString().substring(0, 1) != "_" && start <= 0) {
+            _autoRestValue(source, key, value);
           }
-          _autoRestValue(source, key, value);
         });
       }
       return true;
     }
     exports.resetValue = resetValue;
+    function _deepResetValueRange(source, level, start, length) {
+      level = level || 1;
+      if ((0, utils_1.isEmpty)(source) || !(0, utils_1.isObject)(source))
+        return false;
+      if (start < 0 || length <= 0) {
+        return false;
+      }
+      if (level >= start + length) {
+        return false;
+      }
+      (0, utils_1.forEach)(source, (value, key) => {
+        if ((0, utils_1.isObject)(value)) {
+          _deepResetValueRange(source[key], ++level, start, length);
+        } else if (key.toString().substring(0, 1) != "_" && level >= start && level < start + length) {
+          _autoRestValue(source, key, value);
+        }
+      });
+    }
   }
 });
 

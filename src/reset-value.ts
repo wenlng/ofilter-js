@@ -1,5 +1,6 @@
 import { isEmpty, isObject, isArray, forEach, isString, isBoolean, isFunction } from './utils'
 import {isNumber} from "./utils"
+import {getValue} from './get-value'
 
 /**
  * 深度解析key重置对应value
@@ -53,32 +54,80 @@ function _autoRestValue(source:any, key:string, value:any) {
 
 /**
  * 重置数据对象值，可以自动根据值类型重置，也可以手动配置指定重置
- * @param source  源数据对象
- * @param arg     参数
+ * @param source  源数据对象, 注意：如果是以 "_" 前缀的为私有属性，不会自动重置，请使用手动配置重置
+ * @param arg     参数： true | false 表示是否深度重置，false为第一层重置
+ *                            当为true时深度重置，也可以传递重置的深度值控制，false默认的深度值为1
+ *                            如：resetValue(source, true, 1, 0), 深度从0开始，深度为1的范围，
+ *                      ['user.info.name', 'user.info.account'] 重置的点式字段名
+ *                      {'user.info.name': 'ofilterjs', 'user.info.account': 0}
+ * @param args     args[0]深度层数，默认值为0、args[1]起始值，默认值为0
  * @returns {*}
  */
-export function resetValue(source:any, arg?:any):boolean {
+export function resetValue(source:any, arg:any, ...args:any):boolean {
   source = source || {}
-  const deep = arg = arg || false
+  const config = arg || false
+  const deep = isBoolean(config) ? config : false
+  let start = args?.[1] || 0
+  let length = args?.[0] || 0
 
-  if (!isEmpty(arg) && isArray(arg)) {
-    forEach(arg, (value:any, key:string) => {
+  if (isEmpty(source) || !isObject(source)) return false
+
+  if (!isEmpty(config) && isArray(config)) {
+    forEach(config, (value:any, key:string) => {
       let keys = value.split('.')
       _deepResetValue(source, keys, value, true)
     })
-  } else if (!isEmpty(arg) && isObject(arg)) {
-    forEach(arg, (value:any, key:string) => {
+  } else if (!isEmpty(config) && isObject(config)) {
+    forEach(config, (value:any, key:string) => {
       let keys = key.split('.')
       _deepResetValue(source, keys, value, false)
     })
   } else {
+    if (!deep) {
+      start = 0
+      length = 1
+    }
+
     forEach(source, (value:any, key:string) => {
       if (deep && isObject(value)) {
-        return resetValue(source[key], arg)
+        if (start === 0 && length === 0) {
+          resetValue(source[key], arg, ...args)
+        } else {
+          _deepResetValueRange(source[key], 1, start, length)
+        }
+      } else if (key.toString().substring(0, 1) != '_' && start <= 0){
+        _autoRestValue(source, key, value)
       }
-      _autoRestValue(source, key, value)
     })
   }
 
   return true
+}
+
+/**
+ * 深度范围重围
+ * @param source  源数据对象
+ * @param level   当前层级
+ * @param start   重置开始层
+ * @param length  重置的深度
+ */
+function _deepResetValueRange(source:any, level:number, start:number, length:number) {
+  level = level || 1
+  if (isEmpty(source) || !isObject(source)) return false
+
+  if (start < 0 || length <= 0) {
+    return false
+  }
+
+  if (level >= (start + length)) {
+    return false
+  }
+
+  forEach(source, (value:any, key:string) => {
+    if (isObject(value)) {
+      _deepResetValueRange(source[key], ++level, start, length)
+    } else if (key.toString().substring(0, 1) != '_' && level >= start && level < (start + length)){
+      _autoRestValue(source, key, value)
+    }
+  })
 }

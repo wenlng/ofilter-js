@@ -44,7 +44,8 @@ $ pnpm i ofilterjs
 <br/>
 
 ### 一、数据过滤
-filterValue([数据对象], [配置项], ...[扩展数据])
+> filterValue([数据对象], [配置项], ...[扩展数据])
+
 #### 1.1 过滤/重组数据
 ``` ts
 const data = {
@@ -254,7 +255,8 @@ console.log(newData)
 <br/>
 
 ### 二、数据读取
-getValue([名称访问字符串], [默认值])
+> getValue([名称访问字符串], [默认值])
+
 #### 2.1 值读取 / 深度读取
 ``` ts
 const data = {
@@ -339,8 +341,12 @@ console.log(su)   // js
 <br/>
 
 ### 三、数据重置
-resetValue([数据对象], [配置，可选])
+> resetValue([数据对象], [配置，可选])
+
+Tip: 默认情况下属性名带有 '_' 前缀的将不会参与自动重置，但可以使用手动配置指定.
+
 #### 3.1 自动识别值类型重置值
+浅重置（第一层有效）
 ``` ts
 const data = {
     lib: {
@@ -349,20 +355,44 @@ const data = {
             alias: '',
             version: 10001
         },
-        support: ['js', 'ts', 'es']
+        support: ['js', 'ts', 'es'],
+        _private: 'private attr' 
+    },
+    lib2: {
+        pkg: {}
     }
 }
 
-// 原始手动方式
-const lib = data && data['lib'] || {}
-lib['support'] = []
-const pkg = lib && lib['pkg'] || {}
-pkg['alias'] = ''
-pkg['name'] = ''
-pkg['version'] = 0
+ofjs.resetValue(data, false)
 
-// 使用 ofilterjs 方式
-ofjs.resetValue(data)
+/**  结果
+const data = {
+    lib: {},
+    lib2: {}
+}
+*/
+```
+
+深重置（默认所有层有效）
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es'],
+        _private: 'private attr' 
+    },
+    lib2 : {
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+ofjs.resetValue(data, true)
 
 /**  结果
 const data = {
@@ -372,7 +402,136 @@ const data = {
             alias: '',
             version: 0
         },
-        support: []
+        support: [],
+        _private: 'private attr' 
+    },
+    lib2 : {
+        pkg: {
+            name: ''
+        }
+    }
+}
+*/
+```
+
+深重置 - 指定深度层数，不指定起始位置（默认从0开始）
+``` ts
+const data = {
+    // 0层
+    name: 'lib_list',
+    lib: {
+        // 1层
+        type: 'npm',
+        pkg: {
+            // 2层
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: {
+            'js' : 'javascript',
+            'ts' : 'typescript'
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: 'npm',
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+// 2代表深度为2个层数，表示：0 ~ (0+2)，不包含(0+2)
+ofjs.resetValue(data, true, 2)
+
+/**  结果
+const data = {
+    // 0层
+    name: '',   // 被重置
+    lib: {
+        // 1层
+        type: '',   // 被重置
+        pkg: {
+            // 2层
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: {
+            'js' : 'javascript',
+            'ts' : 'typescript'
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: '',   // 被重置
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+*/
+```
+
+
+深重置 - 指定深度层数，也指定起始位置
+``` ts
+const data = {
+    // 0层
+    name: 'lib_list',
+    lib: {
+        // 1层
+        type: 'npm',
+        pkg: {
+            // 2层
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001,
+            support: {
+                 // 3层
+                'js' : 'javascript',
+                'ts' : 'typescript'
+            }
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: 'npm',
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+// 2代表深度为2个层数，表示：1 ~ (1+2)，不包含(1+2)
+ofjs.resetValue(data, true, 2, 1)
+
+/**  结果
+const data = {
+    // 0层
+    name: 'lib_list',
+    lib: {
+        // 1层
+        type: '',   // 被重置
+        pkg: {
+            // 2层
+            name: '',   // 被重置
+            alias: '',  // 被重置
+            version: 0, // 被重置
+            support: {
+                 // 3层
+                'js' : 'javascript',
+                'ts' : 'typescript'
+            }
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: '',   // 被重置
+        pkg: {
+            name: ''    // 被重置
+        }
     }
 }
 */
@@ -388,13 +547,15 @@ const data = {
             alias: '',
             version: 10001
         },
-        support: ['js', 'ts', 'es']
+        support: ['js', 'ts', 'es'],
+        _private: 'private attr' 
     }
 }
 
 ofjs.resetValue(data, [
     'lib.pkg.name',
-    'lib.pkg.version'
+    'lib.pkg.version',
+    'lib.pkg._private'
 ])
 
 /**  结果
@@ -405,7 +566,8 @@ const data = {
             alias: '',
             version: 0
         },
-        support: ['js', 'ts', 'es']
+        support: ['js', 'ts', 'es'],
+        _private: '' 
     }
 }
 */

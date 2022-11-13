@@ -45,7 +45,8 @@ $ pnpm i ofilterjs
 <br/>
 
 ### 1. Data Filter
-filterValue([Object{}], [Config], ...[extraData])
+> filterValue([Object{}], [Config], ...[extraData])
+
 #### 1.1 Filter or Recombine for data
 ``` ts
 const data = {
@@ -255,7 +256,8 @@ console.log(newData)
 <br/>
 
 ### 2. Read Data
-getValue([nameStr], [defaultValue])
+> getValue([nameStr], [defaultValue])
+
 #### 2.1 Read Value / Deep Read for value
 ``` ts
 const data = {
@@ -311,8 +313,13 @@ console.log(su)   // js
 <br/>
 
 ### 3. Reset Data
-resetValue([Object{}], [Config,?Optional])
+> resetValue([Object{}], [Config,?Optional])
+
+Tip: Prefixes with '_' attribute names will not be reset automatically.
+
 #### 3.1 Auto set at data type
+
+Shallow Reset
 ``` ts
 const data = {
     lib: {
@@ -321,11 +328,46 @@ const data = {
             alias: '',
             version: 10001
         },
-        support: ['js', 'ts', 'es']
+        support: ['js', 'ts', 'es'],
+        _private: 'private attr'  
+    },
+    lib2: {
+        pkg: {
+            name: 'ofilter'
+        }
     }
 }
 
-ofjs.resetValue(data)
+ofjs.resetValue(data, false)
+
+/**  result
+const data = {
+    lib: {},
+    lib2: {}
+}
+*/
+```
+
+Depth Reset
+``` ts
+const data = {
+    lib: {
+        pkg: {
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: ['js', 'ts', 'es'],
+        _private: 'private attr'  
+    },
+    lib2: {
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+ofjs.resetValue(data, true)
 
 /**  result
 const data = {
@@ -335,12 +377,140 @@ const data = {
             alias: '',
             version: 0
         },
-        support: []
+        support: [],
+        _private: 'private attr'
+    },
+    lib2: {
+        pkg: {
+            name: ''
+        }
     }
 }
 */
 ```
+
+Depth Reset， Set depth layer parameter
+``` ts
+const data = {
+    // level 0
+    name: 'lib_list',
+    lib: {
+        // level 1
+        type: 'npm',
+        pkg: {
+            // level 2
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: {
+            'js' : 'javascript',
+            'ts' : 'typescript'
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: 'npm',
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+// 0 ~ (0+2)
+ofjs.resetValue(data, true, 2)
+
+/**  result
+const data = {
+    // level 0
+    name: '',   // Was reset
+    lib: {
+        // level 1
+        type: '',   // Was reset
+        pkg: {
+            // level 2
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001
+        },
+        support: {
+            'js' : 'javascript',
+            'ts' : 'typescript'
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: '',   // Was reset
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+*/
+```
+
+Depth Reset， Set depth layer and start position parameter
+``` ts
+const data = {
+    // level 0
+    name: 'lib_list',
+    lib: {
+        // level 1
+        type: 'npm',
+        pkg: {
+            // level 2
+            name: 'ofilterjs',
+            alias: '',
+            version: 10001,
+            support: {
+                // level 3
+                'js' : 'javascript',
+                'ts' : 'typescript'
+            }
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: 'npm',
+        pkg: {
+            name: 'ofilter'
+        }
+    }
+}
+
+// 1 ~ (1+2)
+ofjs.resetValue(data, true, 2, 1)
+
+/**  result
+const data = {
+    // level 0
+    name: 'lib_list',
+    lib: {
+        // level 1
+        type: '',   // Was reset
+        pkg: {
+            // level 2
+            name: '',   // Was reset
+            alias: '',  // Was reset
+            version: 0, // Was reset
+            support: {
+                // level 2
+                'js' : 'javascript',
+                'ts' : 'typescript'
+            }
+        },
+        _private: 'private attr' 
+    },
+    lib2 : {
+        type: '',   // Was reset
+        pkg: {
+            name: ''    // Was reset
+        }
+    }
+}
+```
 <br/>
+
 
 #### 3.2 Configuration reset field
 ``` ts
