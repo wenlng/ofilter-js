@@ -6,7 +6,7 @@
  *                            如：resetValue(source, true, 1, 0), 深度从0开始，深度为1的范围，
  *                      ['user.info.name', 'user.info.account'] 重置的点式字段名
  *                      {'user.info.name': 'ofilterjs', 'user.info.account': 0}
- * @param args     args[0]深度值，默认值为0、args[1]起始值，默认值为0
+ * @param args     args[0]深度层数，默认值为0、args[1]起始值，默认值为0
  * @returns {*}
  */
-export declare function resetValue(source: any, arg: any, ...args: any): boolean;
+export declare function resetValue(source: any, arg?: any, ...args: any): boolean;

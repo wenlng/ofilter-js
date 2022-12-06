@@ -1,19 +1,22 @@
 {
   "name": "ofilterjs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development.",
   "keywords": [
+    "ofilterjs",
     "ofilter",
-    "object-filter",
+    "object filter",
     "object",
     "filter",
     "json",
     "js",
     "javascript",
+    "typescript",
+    "nodejs",
+    "es6",
     "node",
-    "数据过滤器",
-    "js数据",
-    "js过滤器"
+    "data filter",
+    "json filter"
   ],
   "scripts": {
     "build:esm": "node scripts/build.js -f esm",
@@ -33,12 +36,31 @@
   },
   "author": "Awen",
   "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "typings": "lib/index.d.ts",
-  "module": "dist/ofilter.esm.js",
-  "unpkg": "dist/ofilter.global.js",
-  "jsdelivr": "dist/ofilter.global.js",
+  "main": "./dist/ofilterjs.cjs.js",
+  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
+  "module": "./dist/ofilterjs.esm.js",
+  "unpkg": "./dist/ofilterjs.global.js",
+  "jsdelivr": "./dist/ofilterjs.global.js",
+  "exports": {
+    ".": {
+      "node": {
+        "module": "./dist/ofilterjs.esm.js",
+        "require": "./dist/ofilterjs.cjs.js",
+        "import": "./wrapper.mjs"
+      },
+      "browser": {
+        "import": "./dist/ofilterjs.esm.js",
+        "require": "./dist/ofilterjs.cjs.js"
+      },
+      "default": "./dist/ofilterjs.esm.js"
+    },
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
+  },
+  "browser": {
+    "dist/index.js": "./dist/ofilterjs.global.js"
+  },
   "devDependencies": {
     "esbuild": "^0.15.13",
     "minimist": "^1.2.7",

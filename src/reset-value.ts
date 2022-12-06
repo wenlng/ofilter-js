@@ -1,6 +1,5 @@
 import { isEmpty, isObject, isArray, forEach, isString, isBoolean, isFunction } from './utils'
 import {isNumber} from "./utils"
-import {getValue} from './get-value'
 
 /**
  * 深度解析key重置对应value
@@ -63,7 +62,7 @@ function _autoRestValue(source:any, key:string, value:any) {
  * @param args     args[0]深度层数，默认值为0、args[1]起始值，默认值为0
  * @returns {*}
  */
-export function resetValue(source:any, arg:any, ...args:any):boolean {
+export function resetValue(source:any, arg?:any, ...args:any):boolean {
   source = source || {}
   const config = arg || false
   const deep = isBoolean(config) ? config : false
