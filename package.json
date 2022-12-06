@@ -1,6 +1,6 @@
 {
   "name": "ofilterjs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development.",
   "keywords": [
     "ofilterjs",
@@ -36,7 +36,7 @@
   },
   "author": "Awen",
   "license": "MIT",
-  "main": "./dist/ofilterjs.cjs.js",
+  "main": "./index.js",
   "types": "./lib/index.d.ts",
   "typings": "./lib/index.d.ts",
   "module": "./dist/ofilterjs.esm.js",
@@ -47,7 +47,7 @@
       "node": {
         "module": "./dist/ofilterjs.esm.js",
         "require": "./dist/ofilterjs.cjs.js",
-        "import": "./wrapper.mjs"
+        "import": "./index.mjs"
       },
       "browser": {
         "import": "./dist/ofilterjs.esm.js",
