@@ -1,7 +1,7 @@
 <div align="center">
 <img width="120" style="padding-top: 50px" src="http://47.104.180.148/ofilterjs/ofilterjs_logo.svg"/>
 <h1 style="margin: 0; padding: 0">OfilterJS</h1>
-<p>Data filter processor of Javascript object{}</p>
+<p>Data filter processor of Javascript object</p>
  <a href="https://www.npmjs.com/package/ofilterjs"><img src="https://img.shields.io/npm/v/ofilterjs.svg" alt="Downloads"></a>
  <a href="https://npmcharts.com/compare/ofilterjs?minimal=true"><img src="https://img.shields.io/npm/dm/ofilterjs.svg?sanitize=true" alt="Downloads"></a>
 <a href="https://github.com/wenlng/ofilter-js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/wenlng/ofilter-js.svg"/></a>
@@ -12,10 +12,13 @@
 <br/>
 
 > English | [中文](README_zh.md)
-<p>🖖 OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development. </p>
+<p>🖖 <a href="https://github.com/wenlng/ofilter-js">OfilterJs</a> is a data object filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development. </p>
 
 <p> ⭐️ If it helps you, please give a star.</p>
 <br/>
+
+- [https://github.com/wenlng/ofilter-js](https://github.com/wenlng/ofilter-js)
+
 
 ### Supported languages
 - Javascript
