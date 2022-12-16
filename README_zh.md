@@ -23,25 +23,35 @@
 - TypeScript
 
 ### 功能
-- 🍑 filterValue 过滤数据
-- 🍐 getValue 读取数据
-- 🍎 resetValue 重置数据
+- 🍑 `filterValue` 过滤数据
+- 🍐 `getValue` 读取数据
+- 🍎 `resetValue` 重置数据
 
 ### 安装模块
 ``` shell
 $ npm i ofilterjs
 ```
-或其他 pnpm、cnpm、yarn ...
+或其他 `pnpm`、`cnpm`、`yarn` ...
 ``` shell
 $ pnpm i ofilterjs
 ```
+
+### 浏览器
+```html
+<script src="https://unpkg.com/ofilterjs@1.0.6/dist/ofilterjs.global.min.js"></script>
+
+<script>
+    console.log(ofilterjs)
+</script>
+```
+
 <br/>
 
 ### 引入模块
 ``` ts
- import ofjs from 'ofilterjs'
+ const ofjs = require('ofilterjs')
  
- // const ofjs = require('ofilterjs')
+ // import ofjs from 'ofilterjs'
 ```
 <br/>
 

@@ -25,26 +25,36 @@
 - TypeScript
 
 ### Methods
-- 🍑 filterValue
-- 🍐 getValue
-- 🍎 resetValue
+- 🍑 `filterValue`
+- 🍐 `getValue`
+- 🍎 `resetValue`
 
 
 ### Install Module
 ``` shell
 $ npm i ofilterjs
 ```
-Or pnpm, Or cnpm, Or yarn ...
+Or `pnpm`, Or `cnpm`, Or `yarn` ...
 ``` shells
 $ pnpm i ofilterjs
 ```
+
+### Browser
+```html
+<script src="https://unpkg.com/ofilterjs@1.0.6/dist/ofilterjs.global.min.js"></script>
+
+<script>
+    console.log(ofilterjs)
+</script>
+```
+
 <br/>
 
 ### Import Module
 ``` ts
- import ofjs from 'ofilterjs'
+  const ofjs = require('ofilterjs')
  
- // const ofjs = require('ofilterjs')
+ // import ofjs from 'ofilterjs'
 ```
 <br/>
 
