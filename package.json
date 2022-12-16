@@ -1,6 +1,6 @@
 {
   "name": "ofilterjs",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "OfilterJs is a data object {} filter processor for Javascript, which provides simpler, more convenient and more efficient data operations for development.",
   "keywords": [
     "ofilterjs",

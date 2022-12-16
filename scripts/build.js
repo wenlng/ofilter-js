@@ -14,7 +14,6 @@ const format = args.f || 'global'
 const outputFormat = format.startsWith('global') ? 'iife' : format === 'cjs' ? 'cjs' : 'esm'
 
 const outfile = resolve(__dirname, `../dist/${target}.${format}.js`)
-
 build({
     entryPoints: [resolve(__dirname, `../lib/index.js`)],
     outfile,
@@ -22,7 +21,21 @@ build({
     sourcemap: true,
     format: outputFormat,
     globalName: pkgName,
+    platform: format === 'cjs' ? 'node' : 'browser'
+}).then(() => {
+    console.log(`>>>> ${pkgName} [${outputFormat}] build done ~~~`)
+})
+
+const outfileMin = resolve(__dirname, `../dist/${target}.${format}.min.js`)
+build({
+    entryPoints: [resolve(__dirname, `../lib/index.js`)],
+    outfile: outfileMin,
+    bundle: true,
+    sourcemap: false,
+    format: outputFormat,
+    globalName: pkgName,
     platform: format === 'cjs' ? 'node' : 'browser',
+    minify: true
 }).then(() => {
     console.log(`>>>> ${pkgName} [${outputFormat}] build done ~~~`)
 })
