@@ -404,6 +404,7 @@ const data = {
     }
 }
 
+// ofjs.resetValue(data), 第二参数默认值为 true
 ofjs.resetValue(data, true)
 
 /**  结果

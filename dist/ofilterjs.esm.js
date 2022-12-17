@@ -317,8 +317,8 @@ var require_reset_value = __commonJS({
     }
     function resetValue(source, arg, ...args) {
       source = source || {};
-      const config = arg || false;
-      const deep = (0, utils_1.isBoolean)(config) ? config : false;
+      const config = arg;
+      const deep = (0, utils_1.isBoolean)(arg) ? arg : true;
       let start = (args === null || args === void 0 ? void 0 : args[1]) || 0;
       let length = (args === null || args === void 0 ? void 0 : args[0]) || 0;
       if ((0, utils_1.isEmpty)(source) || !(0, utils_1.isObject)(source))

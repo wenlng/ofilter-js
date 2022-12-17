@@ -37,5 +37,5 @@ build({
     platform: format === 'cjs' ? 'node' : 'browser',
     minify: true
 }).then(() => {
-    console.log(`>>>> ${pkgName} [${outputFormat}] build done ~~~`)
+    console.log(`>>>> ${pkgName} [${outputFormat}] min build done ~~~`)
 })
