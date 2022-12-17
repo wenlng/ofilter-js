@@ -38,7 +38,7 @@ $ pnpm i ofilterjs
 
 ### 浏览器
 ```html
-<script src="https://unpkg.com/ofilterjs@1.0.6/dist/ofilterjs.global.min.js"></script>
+<script src="https://unpkg.com/ofilterjs@1.0.7/dist/ofilterjs.global.min.js"></script>
 
 <script>
     console.log(ofilterjs)
