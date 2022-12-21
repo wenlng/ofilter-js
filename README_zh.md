@@ -36,6 +36,15 @@ $ npm i ofilterjs
 $ pnpm i ofilterjs
 ```
 
+### 引入模块
+``` ts
+ const ofjs = require('ofilterjs')
+ 
+ // import ofjs from 'ofilterjs'
+```
+
+<br/>
+
 ### 浏览器
 ```html
 <script src="https://unpkg.com/ofilterjs@1.0.7/dist/ofilterjs.global.min.js"></script>
@@ -45,14 +54,6 @@ $ pnpm i ofilterjs
 </script>
 ```
 
-<br/>
-
-### 引入模块
-``` ts
- const ofjs = require('ofilterjs')
- 
- // import ofjs from 'ofilterjs'
-```
 <br/>
 
 ### 一、数据过滤

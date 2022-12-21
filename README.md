@@ -39,6 +39,15 @@ Or `pnpm`, Or `cnpm`, Or `yarn` ...
 $ pnpm i ofilterjs
 ```
 
+### Import Module
+``` ts
+  const ofjs = require('ofilterjs')
+ 
+ // import ofjs from 'ofilterjs'
+```
+
+<br/>
+
 ### Browser
 ```html
 <script src="https://unpkg.com/ofilterjs@1.0.7/dist/ofilterjs.global.min.js"></script>
@@ -46,15 +55,6 @@ $ pnpm i ofilterjs
 <script>
     console.log(ofilterjs)
 </script>
-```
-
-<br/>
-
-### Import Module
-``` ts
-  const ofjs = require('ofilterjs')
- 
- // import ofjs from 'ofilterjs'
 ```
 <br/>
 
