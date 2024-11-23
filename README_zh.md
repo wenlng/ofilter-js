@@ -621,7 +621,7 @@ const data = {
 ```
 <br/>
 
-> 请作者喝杯咖啡: [http://witkeycode.com/sponsor](http://witkeycode.com/sponsor)
+> 请作者喝杯咖啡: [http://wencodes.com/sponsor](http://wencodes.com/sponsor)
 <br/>
 
 ## LICENSE
